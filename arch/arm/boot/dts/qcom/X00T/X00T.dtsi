@@ -19,4 +19,4 @@
 #include "X00T-memory.dtsi"
 #include "X00T-pinctrl.dtsi"
 #include "X00T-tweaks.dtsi"
-#include "../../sdm660-thermal.dtsi"
+#include "X00T-thermal.dtsi"

@@ -2288,7 +2288,7 @@ static void qpnp_timed_enable_worker(struct work_struct *work)
 {
 	struct qpnp_hap *hap = container_of(work, struct qpnp_hap,
 					 td_work);
-	bool state = !!time_ms;
+	bool state;
 	ktime_t rem;
 	int rc;
 	int time_ms;

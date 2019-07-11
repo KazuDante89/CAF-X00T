@@ -21,15 +21,15 @@
 		qcom,start-delay = <60>;
 		zone@0 {
 			reg = <0>;
-			qcom,silver-khz = <1612800>;
-			qcom,gold-khz = <1843200>;
+			qcom,silver-khz = <1843200>;
+			qcom,gold-khz = <2208000>;
 			qcom,trip-deg = <53>;
 		};
 
 		zone@1 {
 			reg = <1>;
-			qcom,silver-khz = <1612800>;
-			qcom,gold-khz = <1843200>;
+			qcom,silver-khz = <1843200>;
+			qcom,gold-khz = <2208000>;
 			qcom,trip-deg = <58>;
 		};
 

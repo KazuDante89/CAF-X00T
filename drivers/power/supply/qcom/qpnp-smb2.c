@@ -38,6 +38,10 @@
 #include <asm-generic/errno-base.h>
 #endif
 
+#ifdef CONFIG_FORCE_FAST_CHARGE
+#include <linux/fastchg.h>
+#endif
+
 #define SMB2_DEFAULT_WPWR_UW	8000000
 
 static struct smb_params v1_params = {

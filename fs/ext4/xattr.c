@@ -958,12 +958,8 @@ inserted:
 				if (ref >= EXT4_XATTR_REFCOUNT_MAX)
 					ce->e_reusable = 0;
 				ea_bdebug(new_bh, "reusing; refcount now=%d",
-<<<<<<< HEAD
-					le32_to_cpu(BHDR(new_bh)->h_refcount));
-=======
 					  ref);
 				ext4_xattr_block_csum_set(inode, new_bh);
->>>>>>> 8bc0d8e9bac6... mbcache: add reusable flag to cache entries
 				unlock_buffer(new_bh);
 				error = ext4_handle_dirty_xattr_block(handle,
 								      inode,

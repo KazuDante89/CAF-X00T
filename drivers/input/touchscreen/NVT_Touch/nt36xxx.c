@@ -200,10 +200,6 @@ static int nvt_lcm_power_source_ctrl(struct nvt_ts_data *data, int enable)
 extern int32_t nvt_extra_proc_init(void);
 #endif
 
-#if NVT_TOUCH_MP
-extern int32_t nvt_mp_proc_init(void);
-#endif
-
 struct nvt_ts_data *ts;
 
 static struct workqueue_struct *nvt_wq;
@@ -1753,14 +1749,6 @@ static int32_t nvt_ts_probe(struct i2c_client *client, const struct i2c_device_i
 	}
 #endif
 
-#if NVT_TOUCH_MP
-	ret = nvt_mp_proc_init();
-	if (ret != 0) {
-		NVT_ERR("nvt mp proc init failed. ret=%d\n", ret);
-		goto err_init_NVT_ts;
-	}
-#endif
-
 #if WAKEUP_GESTURE
 	er = create_gesture_node();
 #endif
@@ -1783,7 +1771,7 @@ static int32_t nvt_ts_probe(struct i2c_client *client, const struct i2c_device_i
 
 err_register_fb_notif_failed:
 
-#if (NVT_TOUCH_PROC || NVT_TOUCH_EXT_PROC || NVT_TOUCH_MP)
+#if (NVT_TOUCH_PROC || NVT_TOUCH_EXT_PROC)
 err_init_NVT_ts:
 #endif
 	free_irq(client->irq, ts);

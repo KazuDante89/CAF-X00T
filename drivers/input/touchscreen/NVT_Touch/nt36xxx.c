@@ -16,21 +16,6 @@
  *
  */
 
-#if 0
-/* Huaqin add by yuexinghan for ITO test start */
-#include <linux/init.h>
-#include <linux/cdev.h>
-#include <linux/fs.h>
-#include <linux/device.h>
-#include <linux/miscdevice.h>
-#include <linux/platform_device.h>
-#include <linux/gfp.h>
-#include <linux/slab.h>
-#include <linux/miscdevice.h>
-#include <linux/list.h>
-#include <linux/device.h>
-/* Huaqin add by yuexinghan for ITO test end */
-#endif
 #include <linux/kernel.h>
 #include <linux/kobject.h>
 #include <linux/module.h>
@@ -932,60 +917,6 @@ static int32_t nvt_flash_proc_init(void)
 }
 #endif
 
-#if 0
-/* Huaqin add by yuexinghan for ITO test start */
-/**********add ito test mode function  *******************/
-int nvt_TestResultLen=0;
-static struct platform_device hwinfo_device= {
-	.name = HWINFO_NAME,
-	.id = -1,
-};
-
-static ssize_t ito_test_show(struct device *dev,struct device_attribute *attr,char *buf)
-{
-	int count;
-	ito_selftest_open();
-	count = sprintf(buf, "%d\n", nvt_TestResultLen);
-	return count;
-}
-
-static ssize_t ito_test_store(struct device *dev,struct device_attribute *attr,const char *buf, size_t count)
-{
-	return 0;
-}
-
-static DEVICE_ATTR(factory_check, 0644, ito_test_show, ito_test_store);
-
-static struct attribute *ito_test_attributes[] ={
-
-	&dev_attr_factory_check.attr,
-	NULL
-};
-static struct attribute_group ito_test_attribute_group = {
-
-.attrs = ito_test_attributes
-
-};
-int nvt_test_node_init(struct platform_device *tpinfo_device)
-{
-	int err=0;
-    err = sysfs_create_group(&tpinfo_device->dev.kobj, &ito_test_attribute_group);
-    if (0 != err)
-    {
-        printk( "[nvt-ito] %s() - ERROR: sysfs_create_group() failed.",  __func__);
-        sysfs_remove_group(&tpinfo_device->dev.kobj, &ito_test_attribute_group);
-        return -EIO;
-    }
-    else
-    {
-        printk("[nvt-ito] %s() - sysfs_create_group() succeeded.", __func__);
-    }
-    return err;
-}
-/*************************************************/
-/* Huaqin add by yuexinghan for ITO test end */
-#endif
-
 #if WAKEUP_GESTURE
 /* Huaqin add by yuexinghan for gesture mode 20171030 start */
 #define ID_GESTURE_WORD_C			12
@@ -1595,14 +1526,6 @@ static int32_t nvt_ts_probe(struct i2c_client *client, const struct i2c_device_i
 	queue_delayed_work(nvt_fwu_wq, &ts->nvt_fwu_work, msecs_to_jiffies(14000));
 #endif
 
-#if 0
-	/* Huaqin add by yuexinghan for ITO test start */
-	//--------add ito node
-	platform_device_register(&hwinfo_device);
-	nvt_test_node_init(&hwinfo_device);
-	/* Huaqin add by yuexinghan for ITO test end */
-#endif
-
 	//---set device node---
 #if NVT_TOUCH_PROC
 	ret = nvt_flash_proc_init();
@@ -1871,13 +1794,6 @@ static int fb_notifier_callback(struct notifier_block *self, unsigned long event
 	return 0;
 }
 
-#if 0
-static const struct dev_pm_ops nvt_ts_dev_pm_ops = {
-	.suspend = nvt_ts_suspend,
-	.resume  = nvt_ts_resume,
-};
-#endif
-
 static const struct i2c_device_id nvt_ts_id[] = {
 	{ NVT_I2C_NAME, 0 },
 	{ }
@@ -1906,11 +1822,7 @@ static struct i2c_driver nvt_i2c_driver = {
 	.driver = {
 		.name	= NVT_I2C_NAME,
 		.owner	= THIS_MODULE,
-#if 0
-#ifdef CONFIG_PM
-		.pm = &nvt_ts_dev_pm_ops,
-#endif
-#endif
+
 #ifdef CONFIG_OF
 		.of_match_table = nvt_match_table,
 #endif

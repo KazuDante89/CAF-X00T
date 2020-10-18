@@ -18,13 +18,6 @@
 #ifndef 	_LINUX_NVT_TOUCH_H
 #define		_LINUX_NVT_TOUCH_H
 
-#if 0
-/* Huaqin add by yuexinghan for ITO test start */
-#include <linux/platform_device.h>
-#include <linux/device.h>
-/* Huaqin add by yuexinghan for ITO test end */
-#endif
-
 #include <linux/i2c.h>
 #include <linux/input.h>
 /* Huaqin add by yuexinghan for ITO test start */
@@ -68,14 +61,6 @@
 
 //---Input device info.---
 #define NVT_TS_NAME "NVTCapacitiveTouchScreen"
-
-#if 0
-/* Huaqin add by yuexinghan for ITO test start */
-#define HWINFO_NAME		"tp_wake_switch"
-//-------------add ito test
-extern int32_t ito_selftest_open(void);
-/* Huaqin add by yuexinghan for ITO test end */
-#endif
 
 //---Touch info.---
 #define TOUCH_MAX_FINGER_NUM 10
@@ -185,11 +170,6 @@ typedef enum {
 
 //---extern structures---
 extern struct nvt_ts_data *ts;
-#if 0
-/* Huaqin add by yuexinghan for ITO test start */
-extern int nvt_TestResultLen;
-/* Huaqin add by yuexinghan for ITO test end */
-#endif
 
 //---extern functions---
 extern int32_t CTP_I2C_READ(struct i2c_client *client, uint16_t address, uint8_t *buf, uint16_t len);
